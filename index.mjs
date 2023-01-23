@@ -39,10 +39,10 @@ const getPastes = async (req, res, next) => {
 
 app.get("/breaches", getPastes);
 
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(express.static(path.resolve(__dirname, "client/build")));
 
 app.get("*", (_, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
 });
 
 app.listen(PORT, () => {
