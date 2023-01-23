@@ -25,3 +25,20 @@ $ cd am-i-compromised/server
 $ npm install
 $ npm start
 ```
+
+## Future Improvments
+For things I did not quite have time for, but would be great improvements
+
+- Reduce server load: cache emails that have already been checked
+- Pagination (I did not see [HIBP API](https://haveibeenpwned.com/API/v3) directly support this)
+- Integrating GraphQL for client side querying and serving up data
+- Typescript instead of PropTypes
+- Tests
+    - Unit
+    - Integration
+    - Automated e2e tests with something like Cypress
+- Terraform usage
+- Refactor server code if it were to grow
+    - Better directory structure - routes, controllers, services
+- Move search and filtering to server side, debounce frontend input
+- Move components that deal with api into container components and pass down data as needed
