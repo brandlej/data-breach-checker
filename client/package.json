@@ -1,7 +1,6 @@
 {
-  "name": "am-i-compromised",
+  "name": "client",
   "version": "0.1.0",
-  "description": "Tool to check if your email has been compromised in any data breaches",
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
