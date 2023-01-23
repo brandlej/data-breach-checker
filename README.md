@@ -1,7 +1,7 @@
 # Am I Compromised?
 This is a tool powered with React and Node, using the [haveibeenpwned](https://haveibeenpwned.com/) API, to check if your email has been compromised in any data breaches.
 
-<!-- Add gif of quick demo of project -->
+![Demo Gif](demo.gif)
 
 ## Technologies
 - React
@@ -26,7 +26,7 @@ $ npm install
 $ npm start
 ```
 
-## Future Improvments
+## Future Improvements
 For things I did not quite have time for, but would be great improvements
 
 - Reduce server load: cache emails that have already been checked
@@ -42,3 +42,4 @@ For things I did not quite have time for, but would be great improvements
     - Better directory structure - routes, controllers, services
 - Move search and filtering to server side, debounce frontend input
 - Move components that deal with api into container components and pass down data as needed
+- Adding Error Boundaries with fallback components
