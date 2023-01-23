@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
@@ -22,7 +23,32 @@ const propTypes = {
 };
 
 export const BreachesTable = ({ breaches }) => {
-  if (!breaches) return null;
+  const ASC = "asc";
+  const DESC = "desc";
+
+  const [tableData, setTableData] = useState(breaches);
+  const [sortDirection, setSortDirection] = useState(ASC);
+
+  const sortArrayByEmailCount = (arr, sortBy) => {
+    switch (sortBy) {
+      case ASC:
+        return arr.sort((a, b) =>
+          a.EmailCount < b.EmailCount ? 1 : b.EmailCount < a.EmailCount ? -1 : 0
+        );
+      case DESC:
+      default:
+        return arr.sort((a, b) =>
+          a.EmailCount > b.EmailCount ? 1 : b.EmailCount > a.EmailCount ? -1 : 0
+        );
+    }
+  };
+
+  const handleSort = () => {
+    setTableData(sortArrayByEmailCount(tableData, sortDirection));
+    setSortDirection(sortDirection === ASC ? DESC : ASC);
+  };
+
+  if (!tableData) return null;
 
   return (
     <TableContainer component={Paper}>
@@ -30,13 +56,17 @@ export const BreachesTable = ({ breaches }) => {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell align="right">Email Count</TableCell>
+            <TableCell align="right" onClick={handleSort}>
+              <TableSortLabel active={true} direction={sortDirection}>
+                Email Count
+              </TableSortLabel>
+            </TableCell>
             <TableCell align="right">Source</TableCell>
             <TableCell align="right">Title</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {breaches.map(({ Id, Date, EmailCount, Source, Title }) => (
+          {tableData.map(({ Id, Date, EmailCount, Source, Title }) => (
             <BreachesTableRow
               key={Id}
               date={Date}

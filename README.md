@@ -11,9 +11,17 @@ This is a tool powered with React and Node, using the [haveibeenpwned](https://h
 - Express
 
 ## Setup
-To run this project, install locally using npm:
+To run this project, install locally using npm.
+
+Starting client:
 ```
-$ cd am-i-compromised
+$ cd am-i-compromised/client
+$ npm install
+$ npm start
+```
+Starting server:
+```
+$ cd am-i-compromised/server
 $ npm install
 $ npm start
 ```

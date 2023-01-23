@@ -11,6 +11,9 @@ const styles = {
   loadingIndicator: {
     margin: "4em",
   },
+  checkEmailForm: {
+    marginBottom: "1em",
+  },
 };
 
 export const Home = () => {
@@ -36,7 +39,7 @@ export const Home = () => {
             </h1>
             <p>See if your email was compromised in a data breach</p>
           </Grid>
-          <Grid item>
+          <Grid item style={styles.checkEmailForm}>
             <CheckEmailForm onSubmit={onFormSubmit} />
           </Grid>
           <Grid item>
