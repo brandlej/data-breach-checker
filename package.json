@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.mjs",
-    "heroku-postbuild": "cd client && npm && npm run build"
+    "heroku-postbuild": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",
