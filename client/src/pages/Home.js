@@ -16,9 +16,9 @@ const styles = {
 export const Home = () => {
   const [breaches, setBreaches] = useState(null);
   const [loading, setLoading] = useState(false);
-  const onFormSubmit = async (values) => {
+  const onFormSubmit = async ({ email }) => {
     setLoading(true);
-    const data = await getBreaches(values);
+    const data = await getBreaches(encodeURIComponent(email.trim()));
     setLoading(false);
     setBreaches(data);
   };
@@ -28,7 +28,12 @@ export const Home = () => {
       <Box>
         <Grid direction="column" alignItems="center" container>
           <Grid item align="center">
-            <h1>Am I Compromised?</h1>
+            <h1>
+              Am I Compromised?{" "}
+              <span role="img" aria-label="curious face">
+                &#129488;
+              </span>
+            </h1>
             <p>See if your email was compromised in a data breach</p>
           </Grid>
           <Grid item>

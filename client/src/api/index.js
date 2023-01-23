@@ -1,5 +1,3 @@
-const API_PREFIX = "/";
-
 const getParser = (contentType) => {
   switch (contentType) {
     case null:
@@ -39,5 +37,5 @@ const request = (path, opts = {}) =>
     },
   });
 
-export const getBreaches = ({ email }) =>
+export const getBreaches = (email) =>
   request(`breaches?email=${email}`).then(parse);

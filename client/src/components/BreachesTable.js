@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,6 +8,18 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { BreachesTableRow } from "./BreachesTableRow";
+
+const propTypes = {
+  breaches: PropTypes.arrayOf(
+    PropTypes.shape({
+      Id: PropTypes.string.isRequired,
+      Date: PropTypes.string,
+      EmailCount: PropTypes.number,
+      Source: PropTypes.string,
+      Title: PropTypes.string,
+    })
+  ),
+};
 
 export const BreachesTable = ({ breaches }) => {
   if (!breaches) return null;
@@ -37,3 +50,5 @@ export const BreachesTable = ({ breaches }) => {
     </TableContainer>
   );
 };
+
+BreachesTable.propTypes = propTypes;
