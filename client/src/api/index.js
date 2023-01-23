@@ -40,4 +40,4 @@ const request = (path, opts = {}) =>
   });
 
 export const getBreaches = ({ email }) =>
-  request(`http://localhost:3001/breaches?email=${email}`).then(parse);
+  request(`breaches?email=${email}`).then(parse);
