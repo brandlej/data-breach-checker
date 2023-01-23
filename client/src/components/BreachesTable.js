@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableSortLabel from "@mui/material/TableSortLabel";
@@ -7,8 +9,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { BreachesTableRow } from "./BreachesTableRow";
+import { useBreachesTable } from "../hooks/useBreachesTable";
 
 const propTypes = {
   breaches: PropTypes.arrayOf(
@@ -23,61 +25,51 @@ const propTypes = {
 };
 
 export const BreachesTable = ({ breaches }) => {
-  const ASC = "asc";
-  const DESC = "desc";
-
-  const [tableData, setTableData] = useState(breaches);
-  const [sortDirection, setSortDirection] = useState(ASC);
-
-  const sortArrayByEmailCount = (arr, sortBy) => {
-    switch (sortBy) {
-      case ASC:
-        return arr.sort((a, b) =>
-          a.EmailCount < b.EmailCount ? 1 : b.EmailCount < a.EmailCount ? -1 : 0
-        );
-      case DESC:
-      default:
-        return arr.sort((a, b) =>
-          a.EmailCount > b.EmailCount ? 1 : b.EmailCount > a.EmailCount ? -1 : 0
-        );
-    }
-  };
-
-  const handleSort = () => {
-    setTableData(sortArrayByEmailCount(tableData, sortDirection));
-    setSortDirection(sortDirection === ASC ? DESC : ASC);
-  };
+  const [tableData, sortDirection, searchInput, handleSort, handleFilter] =
+    useBreachesTable(breaches);
 
   if (!tableData) return null;
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="breaches">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell align="right" onClick={handleSort}>
-              <TableSortLabel active={true} direction={sortDirection}>
-                Email Count
-              </TableSortLabel>
-            </TableCell>
-            <TableCell align="right">Source</TableCell>
-            <TableCell align="right">Title</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {tableData.map(({ Id, Date, EmailCount, Source, Title }) => (
-            <BreachesTableRow
-              key={Id}
-              date={Date}
-              emailCount={EmailCount}
-              source={Source}
-              title={Title}
-            />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <Paper>
+        <TextField
+          fullWidth
+          label="Search breaches by Title"
+          type="search"
+          variant="filled"
+          value={searchInput}
+          onChange={handleFilter}
+        />
+      </Paper>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="breaches">
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell align="right" onClick={handleSort}>
+                <TableSortLabel active={true} direction={sortDirection}>
+                  Email Count
+                </TableSortLabel>
+              </TableCell>
+              <TableCell align="right">Source</TableCell>
+              <TableCell align="right">Title</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tableData.map(({ Id, Date, EmailCount, Source, Title }) => (
+              <BreachesTableRow
+                key={Id}
+                date={Date}
+                emailCount={EmailCount}
+                source={Source}
+                title={Title}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 };
 
