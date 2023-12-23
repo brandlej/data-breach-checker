@@ -1,4 +1,4 @@
-# Am I Compromised?
+# Data breach checker
 This is a tool powered with React and Node to check if your email has been compromised in any data breaches; using the [haveibeenpwned](https://haveibeenpwned.com/) API.
 
 ![Demo Gif](demo.gif)
